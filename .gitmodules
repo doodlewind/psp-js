@@ -1,6 +1,8 @@
 [submodule "quickjs-rs"]
 	path = quickjs-rs
 	url = https://github.com/doodlewind/quickjs-rs.git
+	shallow = true
 [submodule "rust-psp"]
 	path = rust-psp
 	url = https://github.com/doodlewind/rust-psp.git
+	shallow = true

@@ -9,23 +9,19 @@ fn psp_main() {
   unsafe {
     psp::enable_home_button();
 
-    psp::dprintln!("debug: init JSContext from Rust");
     let rt = JS_NewRuntime();
     let ctx = JS_NewContext(rt);
 
-    let code_str = b"1 + 1\0";
-    let script_str = b"script\0";
-    let len = (code_str.len() - 1) as u32;
-    psp::dprintln!("debug: rust side input_len: {}", len);
+    let code_str = b"function test(a) { return a + 999 } test(1)\0";
 
     let value = JS_Eval(
       ctx,
       code_str.as_ptr(),
-      len,
-      script_str.as_ptr(),
+      code_str.len() - 1,
+      b"script\0".as_ptr(),
       JS_EVAL_TYPE_GLOBAL as i32,
     );
 
-    psp::dprint!("Hello QuickJS! tag {}, value {}", value.tag, value.u.int32);
+    psp::dprint!("Hello QuickJS! value {}", value);
   }
 }

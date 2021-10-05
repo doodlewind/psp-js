@@ -12,7 +12,8 @@ fn psp_main() {
     let rt = JS_NewRuntime();
     let ctx = JS_NewContext(rt);
 
-    let code_str = b"function test(a) { return a + 999 } test(1)\0";
+    let code_str = include_str!("./test.js");
+    psp::dprintln!("debug: code len {}", code_str.len());
 
     let value = JS_Eval(
       ctx,
@@ -22,6 +23,6 @@ fn psp_main() {
       JS_EVAL_TYPE_GLOBAL as i32,
     );
 
-    psp::dprint!("Hello QuickJS! value {}", value);
+    psp::dprintln!("Hello QuickJS! value {}", value);
   }
 }
